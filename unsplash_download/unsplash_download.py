@@ -35,7 +35,7 @@ arguments     = docopt(__doc__, help=True, version='unsplash-download '+ud_versi
 download_path = arguments['<folder>']
 base_url      = 'https://unsplash.com'
 page          = 1
-link_search   = re.compile("/photos/[a-zA-Z0-9-]+/download")
+link_search   = re.compile("/photos/[a-zA-Z0-9-_]+/download")
 
 if not os.path.exists(download_path):
     os.makedirs(download_path)
