@@ -4,6 +4,7 @@ unsplash-download - Downloads images from unsplash.com
 
 Usage:
   unsplash-download <folder>
+  unsplash-download <folder> [<profile>]
   unsplash-download -h | --help
   unsplash-download -v | --version
 
@@ -42,13 +43,15 @@ if not os.path.exists(download_path):
 
 while True:
     url = base_url + "/?page=" + str(page)
+    if arguments['<profile>']:
+        url = base_url + "/%s" % arguments['<profile>'] + "/?page=" + str(page)
     print("Parsing page %s" % url)
     try:
         soup = BeautifulSoup(urllib.request.urlopen(url).read(), "lxml")
         for tag in soup.find_all(href=link_search):
             image_id     = str(tag['href']).split('/')[2]
             download_url = base_url + str(tag['href'])
-            
+
             if os.path.exists("%s/%s.jpeg" % (download_path, image_id)):
                 print("Not downloading duplicate %s" % download_url)
                 continue
@@ -58,7 +61,7 @@ while True:
                 base_url + str(tag["href"]),
                 "%s/%s.jpeg" % (download_path, image_id)
             )
-            
+
     except urllib.error.HTTPError as e:
         print("HTML error. This would be all.")
         if DEBUG:
