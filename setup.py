@@ -11,7 +11,7 @@ with open('README.rst') as f:
     long_description = f.read()
 
 setup(name='unsplash-download',
-      version='1.0.3',
+      version='1.1.0',
       description='unsplash.com image downloader',
       long_description=long_description,
       author='Maik Kulbe',
