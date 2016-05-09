@@ -15,7 +15,7 @@ Options:
 """
 
 DEBUG = False
-ud_version='1.0.2'
+ud_version='1.0.3'
 
 import urllib.request
 import re
@@ -49,8 +49,13 @@ while True:
     try:
         soup = BeautifulSoup(urllib.request.urlopen(url).read(), "lxml")
         for tag in soup.find_all(href=link_search):
-            image_id     = str(tag['href']).split('/')[2]
-            download_url = base_url + str(tag['href'])
+            if arguments['<profile>']:
+              image_id     = str(tag['href']).split('/')[2]
+              download_url = base_url + str(tag['href'])
+            else:
+              image_id     = str(tag['href']).split('/')[4]
+              download_url = str(tag['href'])
+
 
             if os.path.exists("%s/%s.jpeg" % (download_path, image_id)):
                 print("Not downloading duplicate %s" % download_url)
@@ -58,7 +63,7 @@ while True:
 
             print("Downloading %s" % download_url)
             urllib.request.urlretrieve(
-                base_url + str(tag["href"]),
+                download_url,
                 "%s/%s.jpeg" % (download_path, image_id)
             )
 
