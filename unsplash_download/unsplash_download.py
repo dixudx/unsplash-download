@@ -49,13 +49,8 @@ while True:
     try:
         soup = BeautifulSoup(urllib.request.urlopen(url).read(), "lxml")
         for tag in soup.find_all(href=link_search):
-            if arguments['<profile>']:
-              image_id     = str(tag['href']).split('/')[2]
-              download_url = base_url + str(tag['href'])
-            else:
-              image_id     = str(tag['href']).split('/')[4]
-              download_url = str(tag['href'])
-
+            download_url = str(tag['href'])
+            image_id     = download_url.split('/')[4]
 
             if os.path.exists("%s/%s.jpeg" % (download_path, image_id)):
                 print("Not downloading duplicate %s" % download_url)
