@@ -17,7 +17,7 @@ Options:
 """
 
 DEBUG = False
-ud_version = '1.2.0'
+ud_version = '1.2.3'
 
 import urllib.parse
 import urllib.request

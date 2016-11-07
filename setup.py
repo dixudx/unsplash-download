@@ -12,7 +12,7 @@ with open('README.rst') as f:
     
 setup(
     name              = 'unsplash-download',
-    version           = '1.2.0',
+    version           = '1.2.3',
     description       = 'unsplash.com image downloader',
     long_description  = long_description,
     author            = 'Maik Kulbe',
